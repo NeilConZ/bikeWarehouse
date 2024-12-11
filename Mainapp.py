@@ -1,6 +1,6 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QLineEdit, QTableWidget, QTableWidgetItem, QTabWidget, QDialog, QFormLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QTabWidget, QDialog, QFormLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout
 from PySide6.QtCore import Qt
 
 class MainScreen(QMainWindow):
@@ -71,13 +71,34 @@ class MainScreen(QMainWindow):
         label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         top_bar_layout.addWidget(label)
 
-
         back_button = QPushButton("Back")
-        back_button.setFixedSize(200,100)
+        back_button.setFixedSize(200, 100)
         back_button.clicked.connect(lambda: self.pages.setCurrentWidget(self.main_page))
         top_bar_layout.addWidget(back_button)
 
         layout.addLayout(top_bar_layout)
+
+        self.inventory = {
+            "Tubular Steel" : 20,
+            "Wheels" : 20,
+            "Seats" : 20,
+            "Gears" : 20,
+            "Brakes" : 20,
+            "Lights" : 20
+
+        }
+
+        self.inventory_table = QTableWidget()
+        self.inventory_table.setColumnCount(2)
+        self.inventory_table.setHorizontalHeaderLabels(["Component", "Quantity"])
+        self.inventory_table.horizontalHeader().setStretchLastSection(True)
+        layout.addWidget(self.inventory_table, alignment=Qt.AlignmentFlag.AlignTop)
+
+
+
+
+
+
         page.setLayout(layout)
         return page
 
