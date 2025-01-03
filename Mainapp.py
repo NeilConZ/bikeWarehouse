@@ -15,6 +15,7 @@ class MainScreen(QMainWindow):
         # setting up the pages
         self.pages = QStackedWidget()
 
+<<<<<<< HEAD
         self.stock = [{
             "Component": "Tubular Steel", "Quantity": 10
         }, {
@@ -28,6 +29,8 @@ class MainScreen(QMainWindow):
         }, {
             "Component": "Lights", "Quantity": 10
         }]
+=======
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
 
         #creating the pages
         self.main_page = self.main_menu_page()
@@ -100,12 +103,31 @@ class MainScreen(QMainWindow):
         self.inventory_table.setHorizontalHeaderLabels(["Component", "Quantity"])
         self.inventory_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         layout.addWidget(self.inventory_table)
+<<<<<<< HEAD
+
+        change_stock = QPushButton("Add/Replenish Stock")
+        change_stock.clicked.connect(self.change_data)
+        layout.addWidget(change_stock)
+=======
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
 
         change_stock = QPushButton("Add/Replenish Stock")
         change_stock.clicked.connect(self.change_data)
         layout.addWidget(change_stock)
 
-
+        self.stock = [{
+            "Component" : "Tubular Steel", "Quantity" : 10
+        },{
+            "Component" : "Wheels", "Quantity" : 10
+        }, {
+            "Component" : "Seats", "Quantity" : 10
+        },{
+            "Component" : "Gears", "Quantity" : 3
+        }, {
+            "Component" : "Brakes", "Quantity" : 10
+        }, {
+            "Component" : "Lights", "Quantity" : 10
+        } ]
 
 
         page.setLayout(layout)
@@ -122,17 +144,27 @@ class MainScreen(QMainWindow):
 
         self.inventory_table.setRowCount(len(self.stock))
         for i, item in enumerate(self.stock):
+<<<<<<< HEAD
 
 
             quantity_value = QTableWidgetItem(str(item["Quantity"]))
 
+=======
+            self.inventory_table.setItem(i, 0, QTableWidgetItem(item["Component"]))
+
+            quantity_value = QTableWidgetItem(str(item["Quantity"]))
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
             if item["Quantity"] <= 3:
                 quantity_value.setForeground(QBrush(QColor("red")))
                 low_quantity = True
             else:
                 quantity_value.setForeground(QBrush(QColor("white")))
 
+<<<<<<< HEAD
             self.inventory_table.setItem(i, 0, QTableWidgetItem(item["Component"]))
+=======
+
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
             self.inventory_table.setItem(i, 1, quantity_value)
 
         if low_quantity:
