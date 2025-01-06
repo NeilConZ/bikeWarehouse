@@ -2,7 +2,11 @@ import sys
 
 from PySide6.QtGui import QColor, QBrush
 from PySide6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QTableWidget, QTableWidgetItem,
+<<<<<<< HEAD
                                QFormLayout, QMessageBox, QStackedWidget, QHBoxLayout, QInputDialog, QComboBox, QLineEdit)
+=======
+                               QTabWidget, QDialog, QFormLayout, QMessageBox, QStackedWidget, QSizePolicy, QHBoxLayout, QInputDialog, QComboBox, QLineEdit)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
 from PySide6.QtCore import Qt
 
 
@@ -18,6 +22,7 @@ class MainScreen(QMainWindow):
         # setting up the pages
         self.pages = QStackedWidget()
 
+<<<<<<< HEAD
         #sets up the stock parts and respective quantities for later use
         self.stock = [{
             "Part": "Tubular Steel", "Quantity": 10
@@ -48,6 +53,26 @@ class MainScreen(QMainWindow):
 
 
         #assigns variables to the main screen pages
+=======
+<<<<<<< HEAD
+        self.stock = [{
+            "Component": "Tubular Steel", "Quantity": 10
+        }, {
+            "Component": "Wheels", "Quantity": 10
+        }, {
+            "Component": "Seats", "Quantity": 10
+        }, {
+            "Component": "Gears", "Quantity": 3
+        }, {
+            "Component": "Brakes", "Quantity": 10
+        }, {
+            "Component": "Lights", "Quantity": 10
+        }]
+=======
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
+
+        #creating the pages
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         self.main_page = self.main_menu_page()
         self.inventory_page = self.inventory_management_page()
         self.order_page = self.order_management_page()
@@ -119,6 +144,7 @@ class MainScreen(QMainWindow):
 
         layout.addLayout(top_bar_layout)
 
+<<<<<<< HEAD
         #creates an inventory table called "inventory table" that stores the respective parts and quantities
         self.inventory_table = QTableWidget()
         self.inventory_table.setColumnCount(2)
@@ -127,6 +153,39 @@ class MainScreen(QMainWindow):
         #makes the table not editable
         self.inventory_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         layout.addWidget(self.inventory_table)
+=======
+        self.inventory_table = QTableWidget()
+        self.inventory_table.setColumnCount(2)
+        self.inventory_table.setRowCount(6)
+        self.inventory_table.setHorizontalHeaderLabels(["Component", "Quantity"])
+        self.inventory_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        layout.addWidget(self.inventory_table)
+<<<<<<< HEAD
+
+        change_stock = QPushButton("Add/Replenish Stock")
+        change_stock.clicked.connect(self.change_data)
+        layout.addWidget(change_stock)
+=======
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
+
+        change_stock = QPushButton("Add/Replenish Stock")
+        change_stock.clicked.connect(self.change_data)
+        layout.addWidget(change_stock)
+
+        self.stock = [{
+            "Component" : "Tubular Steel", "Quantity" : 10
+        },{
+            "Component" : "Wheels", "Quantity" : 10
+        }, {
+            "Component" : "Seats", "Quantity" : 10
+        },{
+            "Component" : "Gears", "Quantity" : 3
+        }, {
+            "Component" : "Brakes", "Quantity" : 10
+        }, {
+            "Component" : "Lights", "Quantity" : 10
+        } ]
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
 
         #adds a button that allows users to adjust the held stock by connecting to a function that changes it's data
         change_stock = QPushButton("Adjust Stock")
@@ -138,14 +197,18 @@ class MainScreen(QMainWindow):
 
 
     def load_stock (self, index):
+<<<<<<< HEAD
 
         #sets the variable "alert" to true so that it sets the alert off only when the user enters the inventory page
         self.alert = True
+=======
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         current_page = self.pages.widget(index)
         if current_page == self.inventory_page:
             self.add_table_data()
 
     def add_table_data(self):
+<<<<<<< HEAD
         #assigns a variable called low_quantity and sets it to false
         low_quantity = False
 
@@ -158,24 +221,52 @@ class MainScreen(QMainWindow):
             quantity_value = QTableWidgetItem(str(item["Quantity"]))
 
             #checks if the quantity is less than or equal to 3 and if so, changes to red, otherwise leaves it white
+=======
+        low_quantity = False
+
+        self.inventory_table.setRowCount(len(self.stock))
+        for i, item in enumerate(self.stock):
+<<<<<<< HEAD
+
+
+            quantity_value = QTableWidgetItem(str(item["Quantity"]))
+
+=======
+            self.inventory_table.setItem(i, 0, QTableWidgetItem(item["Component"]))
+
+            quantity_value = QTableWidgetItem(str(item["Quantity"]))
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
             if item["Quantity"] <= 3:
                 quantity_value.setForeground(QBrush(QColor("red")))
                 low_quantity = True
             else:
                 quantity_value.setForeground(QBrush(QColor("white")))
 
+<<<<<<< HEAD
             #adds the part name in the first column and its quantity in the second column
             self.inventory_table.setItem(i, 0, QTableWidgetItem(item["Part"]))
             self.inventory_table.setItem(i, 1, quantity_value)
 
         #if low quantity is true (a part has a quantity of less than 3) it creates the alert
         if low_quantity and self.alert == True:
+=======
+<<<<<<< HEAD
+            self.inventory_table.setItem(i, 0, QTableWidgetItem(item["Component"]))
+=======
+
+>>>>>>> 0624fcffd04c709894ce9b825961c961cdac2532
+            self.inventory_table.setItem(i, 1, quantity_value)
+
+        if low_quantity:
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
             QMessageBox.warning(self, "ALERT", "LOW QUANTITY ALERT", QMessageBox.StandardButton.Ok)
 
 
 
     def change_data(self):
 
+<<<<<<< HEAD
         #asks the user for the part name they want to adjust
         part, saved = QInputDialog.getText(self, "Adjust Stock", "Enter Part Name: ")
         #if the input is not a part or the user doesn't click okay it returns and doesn't continue
@@ -198,6 +289,23 @@ class MainScreen(QMainWindow):
 
         #if the part doesn't match one it stocks an error message is displayed
         return QMessageBox.warning(self,"Error","Not a valid Part.", QMessageBox.StandardButton.Ok)
+=======
+        component, saved = QInputDialog.getText(self, "Add/Replenish Stock", "Enter Component Name : ")
+        if not component or not saved:
+            return
+
+        quantity, saved = QInputDialog.getInt(self, "Add/Replenish Stock", "Enter Quantity:")
+        if not saved:
+            return
+
+        for item in self.stock:
+            if item["Component"].lower() == component.lower():
+                item["Quantity"] = quantity
+                self.add_table_data()
+                return
+
+        return QMessageBox.warning(self,"Error","Not a valid component.", QMessageBox.StandardButton.Ok)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
 
     def production_workflow_page(self):
         page = QWidget()
@@ -221,6 +329,7 @@ class MainScreen(QMainWindow):
         layout.addLayout(top_bar_layout)
 
 
+<<<<<<< HEAD
         #tracks the amount of bikes in each section of the production value and assigns it a value
         self.bike_with_frame_added_amount = 0
         self.bike_with_fork_added_amount = 0
@@ -247,12 +356,36 @@ class MainScreen(QMainWindow):
         #adds the layout to the page
         frame_welding_layout.addWidget(frame_welding_title)
         frame_welding_layout.addWidget(self.bike_with_frame_added_amount_label)
+=======
+
+        self.frame_amount = 0
+        self.fork_amount = 0
+        self.paint_amount = 0
+        self.pedal_amount = 0
+        self.wheel_amount = 0
+        self.gear_amount = 0
+        self.brake_amount = 0
+        self.light_amount = 0
+        self.seat_amount = 0
+
+
+
+        frame_welding_layout = QHBoxLayout()
+        frame_welding_title = QLabel("Frame Welding Station")
+
+        self.frame_amount_label = QLabel(str(self.frame_amount))
+        add_frame = QPushButton("Add Frame")
+
+        frame_welding_layout.addWidget(frame_welding_title)
+        frame_welding_layout.addWidget(self.frame_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         frame_welding_layout.addWidget(add_frame)
         layout.addLayout(frame_welding_layout)
 
 
 
         fork_welding_layout = QHBoxLayout()
+<<<<<<< HEAD
         fork_welding_title = QLabel("Fork Welding station")
 
         self.bike_with_fork_added_amount_label = QLabel(str(self.bike_with_fork_added_amount))
@@ -261,12 +394,22 @@ class MainScreen(QMainWindow):
 
         fork_welding_layout.addWidget(fork_welding_title)
         fork_welding_layout.addWidget(self.bike_with_fork_added_amount_label)
+=======
+        fork_welding_title = QLabel("Fork Welding Station")
+
+        self.fork_amount_label = QLabel(str(self.fork_amount))
+        add_fork = QPushButton("Add Fork")
+
+        fork_welding_layout.addWidget(fork_welding_title)
+        fork_welding_layout.addWidget(self.fork_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         fork_welding_layout.addWidget(add_fork)
         layout.addLayout(fork_welding_layout)
 
 
 
         paint_welding_layout = QHBoxLayout()
+<<<<<<< HEAD
         paint_welding_title = QLabel("Paint Welding station")
 
         self.bike_with_paint_added_amount_label = QLabel(str(self.bike_with_paint_added_amount))
@@ -275,12 +418,22 @@ class MainScreen(QMainWindow):
 
         paint_welding_layout.addWidget(paint_welding_title)
         paint_welding_layout.addWidget(self.bike_with_paint_added_amount_label)
+=======
+        paint_welding_title = QLabel("Paint Welding Station")
+
+        self.paint_amount_label = QLabel(str(self.paint_amount))
+        add_paint = QPushButton("Add Paint")
+
+        paint_welding_layout.addWidget(paint_welding_title)
+        paint_welding_layout.addWidget(self.paint_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         paint_welding_layout.addWidget(add_paint)
         layout.addLayout( paint_welding_layout)
 
 
 
         pedal_welding_layout = QHBoxLayout()
+<<<<<<< HEAD
         pedal_welding_title = QLabel("Pedal Welding station")
 
         self.bike_with_pedal_added_amount_label = QLabel(str(self.bike_with_pedal_added_amount))
@@ -289,12 +442,22 @@ class MainScreen(QMainWindow):
 
         pedal_welding_layout.addWidget(pedal_welding_title)
         pedal_welding_layout.addWidget(self.bike_with_pedal_added_amount_label)
+=======
+        pedal_welding_title = QLabel("Pedal Welding Station")
+
+        self.pedal_amount_label = QLabel(str(self.pedal_amount))
+        add_pedal = QPushButton("Add Pedal")
+
+        pedal_welding_layout.addWidget(pedal_welding_title)
+        pedal_welding_layout.addWidget(self.pedal_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         pedal_welding_layout.addWidget(add_pedal)
         layout.addLayout(pedal_welding_layout)
 
 
 
         wheel_welding_layout = QHBoxLayout()
+<<<<<<< HEAD
         wheel_welding_title = QLabel("Wheel Welding station")
 
         self.bike_with_wheel_added_amount_label = QLabel(str(self.bike_with_wheel_added_amount))
@@ -342,10 +505,53 @@ class MainScreen(QMainWindow):
 
         light_welding_layout.addWidget(light_welding_title)
         light_welding_layout.addWidget(self.bike_with_light_added_amount_label)
+=======
+        wheel_welding_title = QLabel("Wheel Welding Station")
+
+        self.wheel_amount_label = QLabel(str(self.wheel_amount))
+        add_wheel = QPushButton("Add wheel")
+
+        wheel_welding_layout.addWidget(wheel_welding_title)
+        wheel_welding_layout.addWidget(self.wheel_amount_label)
+        wheel_welding_layout.addWidget(add_wheel)
+        layout.addLayout(wheel_welding_layout)
+
+        gear_welding_layout = QHBoxLayout()
+        gear_welding_title = QLabel("Gear Welding Station")
+
+        self.gear_amount_label = QLabel(str(self.gear_amount))
+        add_gear = QPushButton("Add Gear")
+
+        gear_welding_layout.addWidget(gear_welding_title)
+        gear_welding_layout.addWidget(self.gear_amount_label)
+        gear_welding_layout.addWidget(add_gear)
+        layout.addLayout(gear_welding_layout)
+
+        brake_welding_layout = QHBoxLayout()
+        brake_welding_title = QLabel("Brake Welding Station")
+
+        self.brake_amount_label = QLabel(str(self.brake_amount))
+        add_brake = QPushButton("Add Brake")
+
+        brake_welding_layout.addWidget(brake_welding_title)
+        brake_welding_layout.addWidget(self.brake_amount_label)
+        brake_welding_layout.addWidget(add_brake)
+        layout.addLayout(brake_welding_layout)
+
+        light_welding_layout = QHBoxLayout()
+        light_welding_title = QLabel("Light Welding Station")
+
+        self.light_amount_label = QLabel(str(self.light_amount))
+        add_light = QPushButton("Add Light")
+
+        light_welding_layout.addWidget(light_welding_title)
+        light_welding_layout.addWidget(self.light_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         light_welding_layout.addWidget(add_light)
         layout.addLayout(light_welding_layout)
 
         seat_welding_layout = QHBoxLayout()
+<<<<<<< HEAD
         seat_welding_title = QLabel("Seat Welding station")
 
         self.bike_with_seat_added_amount_label = QLabel(str(self.bike_with_seat_added_amount))
@@ -354,6 +560,15 @@ class MainScreen(QMainWindow):
 
         seat_welding_layout.addWidget(seat_welding_title)
         seat_welding_layout.addWidget(self.bike_with_seat_added_amount_label)
+=======
+        seat_welding_title = QLabel("Seat Welding Station")
+
+        self.seat_amount_label = QLabel(str(self.seat_amount))
+        add_seat = QPushButton("Add Seat")
+
+        seat_welding_layout.addWidget(seat_welding_title)
+        seat_welding_layout.addWidget(self.seat_amount_label)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         seat_welding_layout.addWidget(add_seat)
         layout.addLayout(seat_welding_layout)
 
@@ -836,6 +1051,7 @@ class MainScreen(QMainWindow):
         self.bike_wheelSize.addItems(["26 inches", "27.5 inches", "29 inches"])
         form.addRow("Wheel Size: ", self.bike_wheelSize)
 
+<<<<<<< HEAD
         self.bike_gear = QComboBox()
         self.bike_gear.addItems(["Standard Gears", "Race Gears", "Premium Gears"])
         form.addRow("Gears: ", self.bike_gear)
@@ -847,6 +1063,19 @@ class MainScreen(QMainWindow):
         self.bike_light = QComboBox()
         self.bike_light.addItems(["LED Lights", "Standard Lights", "Neon Lights"])
         form.addRow("Lights: ", self.bike_light)
+=======
+        self.bike_gears = QComboBox()
+        self.bike_gears.addItems(["Standard Gears", "Race Gears", "Premium Gears"])
+        form.addRow("Gears: ", self.bike_gears)
+
+        self.bike_brakes = QComboBox()
+        self.bike_brakes.addItems(["Disc Brakes", "Rim Brakes"])
+        form.addRow("Brakes: ", self.bike_brakes)
+
+        self.bike_lights = QComboBox()
+        self.bike_lights.addItems(["LED Lights", "Standard Lights", "Neon Lights"])
+        form.addRow("Lights: ", self.bike_lights)
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
 
         self.order_name = QLineEdit()
         form.addRow("Order Name: ", self.order_name)
@@ -875,9 +1104,15 @@ class MainScreen(QMainWindow):
         bike_model = self.bike_model.currentText()
         bike_colour = self.bike_colour.currentText()
         bike_wheel_size = self.bike_wheelSize.currentText()
+<<<<<<< HEAD
         bike_gears = self.bike_gear.currentText()
         bike_brakes = self.bike_brake.currentText()
         bike_lights = self.bike_light.currentText()
+=======
+        bike_gears = self.bike_gears.currentText()
+        bike_brakes = self.bike_brakes.currentText()
+        bike_lights = self.bike_lights.currentText()
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         order_name = self.order_name.text()
         order_contact_number = self.order_contact_number.text()
         order_delivery_address = self.order_delivery_address.text()
@@ -886,6 +1121,7 @@ class MainScreen(QMainWindow):
             QMessageBox.warning(self, "Error", "Information cannot be empty!", QMessageBox.StandardButton.Ok)
             return
 
+<<<<<<< HEAD
         self.bike_model_chosen = bike_model
         self.bike_colour_chosen = bike_colour
         self.bike_wheelSize_chosen = bike_wheel_size
@@ -893,6 +1129,8 @@ class MainScreen(QMainWindow):
         self.bike_brake_chosen = bike_brakes
         self.bike_light_chosen = bike_lights
 
+=======
+>>>>>>> d2bd5b351eab3755a3448a27af174988639ce313
         order = {
 
             "bike model": bike_model,
